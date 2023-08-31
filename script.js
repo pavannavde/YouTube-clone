@@ -91,7 +91,7 @@ async function getchannelLogo(channelId) {
     const endpoint=`${baseUrl}/channels?key=${apiKey}&id=${channelId}&part=snippet`;
     try{
         const response = await fetch(endpoint);
-        const result =response.json();
+        const result = await response.json();
         return result.items[0].snippet.thumbnails.high.url;
 
     }
@@ -104,30 +104,31 @@ async function getchannelLogo(channelId) {
 
  async function getVideoStatistics(videoId){
    
-    const endpoint = `${baseUrl}/videos?key=${apiKey}&id=${videoId}&part=statistics`;
+    const endpoint = `${baseUrl}/videos?key=${apiKey}&part=statistics&id=${videoId}`;
     try{
         const response = await fetch(endpoint);
         const result = await response.json();
         return  result.items[0].statistics;
     }
     catch(error){
-      alert("An error occured in fetching statstics of video");
+      alert("An error occured in fetching statistics of video");
     }
 
  }
  function converter(value){
+    value= Number(value);
     if(value<1000){
         return `${value} views`;
     }
     if(value<100000)
     {
-       return `${value/1000}k views`
+       return `${Math.floor(value/1000)}k views`
     }
     if(value<1000000)
     {
-        return `${value/100000}lakh views`
+        return `${Math.floor(value/100000)}lakh views`
     }
-    return `${value/1000000}M Views`
+    return `${Math.floor(value/1000000)}M Views`
  }
 
 function renderOntoUI(videoList) {
@@ -159,7 +160,7 @@ async function FetchsearchResult(searchValue) {
     const response = await fetch(endpoint);
     const Data = await response.json();
 
-    for(let i=0;i<Data.items.lenght;i++)
+    for(let i=0;i<Data.items.length;i++)
     {
         let videoId = Data.items[i].id.videoId;
         let channelId = Data.items[i].snippet.channelId;
@@ -167,8 +168,8 @@ async function FetchsearchResult(searchValue) {
         let statistics = await getVideoStatistics(videoId);
         let channelLogo = await getchannelLogo(channelId);
 
-       result.items[i].statistics = statistics;
-       result.items[i].channelLogo = channelLogo;
+       Data.items[i].statistics = statistics;
+       Data.items[i].channelLogo = channelLogo;
   
     }
     
