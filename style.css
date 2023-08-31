@@ -72,7 +72,7 @@
     top:60px;
     background-color: #212121;
     width:20vw;
-    height: 100%;
+    /* height: 100%; */
     color:white;
     position: relative;
     z-index: -1;
@@ -164,7 +164,7 @@
 }
 .video-container{
     width:80vw;
-    /* height: 100vh; */
+    height: 100vh;
     background-color: black;
     color: white;
     display: grid;
@@ -188,7 +188,7 @@
     /* border: 1px solid white; */
     width:22vw;
     padding-bottom: 20px;
-    box-shadow: 1px 1px 10px white;
+    /* box-shadow: 1px 1px 10px white; */
 }
 .top{
     /* border: 1px solid white; */
