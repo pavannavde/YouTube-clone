@@ -1,5 +1,5 @@
 const baseUrl = "https://www.googleapis.com/youtube/v3";
-const apiKey = "AIzaSyBZ6DDme0tlDMpUGcIoJEKNOu327XmUtcQ";
+const apiKey = "AIzaSyAB0-iky5uGJoqxkeLjr607mfUfEYsSnSM";
 const container= document.getElementById("video-container");
 const searchElement = document.getElementById("search");
 const searchbtn= document.getElementById("btn");
@@ -70,21 +70,65 @@ function caluclateUploadTime(publish){
  const secondsPerYear = 365 * secondsPerDay;
 
  if (secondsGap < secondsPerDay) {
-   return `${Math.ceil(secondsGap / (60 * 60))}hrs ago`;
+   return `${Math.floor(secondsGap / (60 * 60))}hrs ago`;
  }
  if (secondsGap < secondsPerWeek) {
-   return `${Math.ceil(secondsGap / secondsPerDay)} days ago`;
+   return `${Math.floor(secondsGap / secondsPerDay)} days ago`;
  }
  if (secondsGap < secondsPerMonth) {
-   return `${Math.ceil(secondsGap / secondsPerWeek)} weeks ago`;
+   return `${Math.floor(secondsGap / secondsPerWeek)} weeks ago`;
  }
  if(secondsGap < secondsPerYear) {
-   return `${Math.ceil(secondsGap / secondsPerMonth)} months ago`;
+   return `${Math.floor(secondsGap / secondsPerMonth)} months ago`;
  }
 
- return `${Math.ceil(secondsGap / secondsPerYear)} years ago`;
+ return `${Math.floor(secondsGap / secondsPerYear)} years ago`;
 
 }
+
+async function getchannelLogo(channelId) {
+
+    const endpoint=`${baseUrl}/channels?key=${apiKey}&id=${channelId}&part=snippet`;
+    try{
+        const response = await fetch(endpoint);
+        const result =response.json();
+        return result.items[0].snippet.thumbnails.high.url;
+
+    }
+    catch(error){
+        alert("An error occured at fetching channel logo")
+    }
+    
+
+}
+
+ async function getVideoStatistics(videoId){
+   
+    const endpoint = `${baseUrl}/videos?key=${apiKey}&id=${videoId}&part=statistics`;
+    try{
+        const response = await fetch(endpoint);
+        const result = await response.json();
+        return  result.items[0].statistics;
+    }
+    catch(error){
+      alert("An error occured in fetching statstics of video");
+    }
+
+ }
+ function converter(value){
+    if(value<1000){
+        return `${value} views`;
+    }
+    if(value<100000)
+    {
+       return `${value/1000}k views`
+    }
+    if(value<1000000)
+    {
+        return `${value/100000}lakh views`
+    }
+    return `${value/1000000}M Views`
+ }
 
 function renderOntoUI(videoList) {
     container.innerHTML="";
@@ -96,11 +140,11 @@ function renderOntoUI(videoList) {
                      </div>
                     <div class="Bottom">
                       <div>
-                        <img src="./Assets/User-1.svg" alt="profile">
+                        <img src="${video.channelLogo}" alt="profile">
                    </div>
                  <div class="text">
                      <p>${video.snippet.title}.</p>
-                     <p class="Cinfo">James Gouse <br> 15k Views .${caluclateUploadTime(video.snippet.publishTime)}</p>
+                     <p class="Cinfo">${video.snippet.channelTitle} <br> ${ converter(video.statistics.viewCount)} .${caluclateUploadTime(video.snippet.publishTime)}</p>
                  </div>
              </div>`;
 
@@ -115,6 +159,19 @@ async function FetchsearchResult(searchValue) {
     const response = await fetch(endpoint);
     const Data = await response.json();
 
+    for(let i=0;i<Data.items.lenght;i++)
+    {
+        let videoId = Data.items[i].id.videoId;
+        let channelId = Data.items[i].snippet.channelId;
+
+        let statistics = await getVideoStatistics(videoId);
+        let channelLogo = await getchannelLogo(channelId);
+
+       result.items[i].statistics = statistics;
+       result.items[i].channelLogo = channelLogo;
+  
+    }
+    
     renderOntoUI(Data.items);
   } catch (error) {
     alert(`An error occured ${error}`);

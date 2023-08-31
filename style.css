@@ -164,7 +164,7 @@
 }
 .video-container{
     width:80vw;
-    height: 100vh;
+    /* height: 100%; */
     background-color: black;
     color: white;
     display: grid;
