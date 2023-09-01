@@ -131,10 +131,15 @@ async function getchannelLogo(channelId) {
     return `${Math.floor(value/1000000)}M Views`
  }
 
+ function navigateToVideoDetails(videoId){
+  document.cookie = `id=${videoId}; path/videoDetail.html`;
+  window.location.href = "http://127.0.0.1:5500/videoDetail.html";
+ }
+
 function renderOntoUI(videoList) {
     container.innerHTML="";
     videoList.forEach((video) => {
-        let card = document.createElement("div");
+        const card = document.createElement("div");
         card.className = "video-card";
         card.innerHTML = `<div class="top">
                       <img src="${video.snippet.thumbnails.high.url}" alt="thumbnail">
@@ -148,7 +153,10 @@ function renderOntoUI(videoList) {
                      <p class="Cinfo">${video.snippet.channelTitle} <br> ${ converter(video.statistics.viewCount)} .${caluclateUploadTime(video.snippet.publishTime)}</p>
                  </div>
              </div>`;
-
+       card.addEventListener("click",()=>{
+          alert("your in")
+        navigateToVideoDetails(video.id.videoId);
+       });
         container.appendChild(card);
     });
   
