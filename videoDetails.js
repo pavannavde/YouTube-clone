@@ -113,12 +113,13 @@ window.addEventListener("load", () => {
         </div>
     </div>`;
      playcard.appendChild(videodetail);
+     data.channelLogo=getchannelLogo(data.snippet.channelId);
 
      const channeldiv = document.createElement("div");
      channeldiv.className="channel-div";
      channeldiv.innerHTML=` <div class="channelLogo">
      <div>
-      <img src="${getchannelLogo(data.snippet.channelId)}" alt="profile"class="profile">
+      <img src="${data.channelLogo}" alt="profile"class="profile">
        <div>
        <p>${data.snippet.channelTitle}</p>
        <p class="grey">1.2M Subscribers</p>
