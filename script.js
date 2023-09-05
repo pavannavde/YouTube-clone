@@ -133,7 +133,7 @@ async function getchannelLogo(channelId) {
 
  function navigateToVideoDetails(videoId){
   document.cookie = `id=${videoId}; path/videoDetail.html`;
-   document.location = "http://127.0.0.1:5500/videoDetail.html";
+   document.location = "https://pavannavde.github.io/YouTube-clone/videoDetail";
  }
 
 function renderOntoUI(videoList) {
