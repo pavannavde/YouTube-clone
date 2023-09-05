@@ -1,5 +1,5 @@
 const baseUrl = "https://www.googleapis.com/youtube/v3";
-const apiKey = "AIzaSyAB0-iky5uGJoqxkeLjr607mfUfEYsSnSM";
+const apiKey = "AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA";
 const container= document.getElementById("video-container");
 const searchElement = document.getElementById("search");
 const searchbtn= document.getElementById("btn");
@@ -133,7 +133,7 @@ async function getchannelLogo(channelId) {
 
  function navigateToVideoDetails(videoId){
   document.cookie = `id=${videoId}; path/videoDetail.html`;
-  window.location.href = "http://127.0.0.1:5500/videoDetail.html";
+   document.location = "http://127.0.0.1:5500/videoDetail.html";
  }
 
 function renderOntoUI(videoList) {
@@ -154,7 +154,6 @@ function renderOntoUI(videoList) {
                  </div>
              </div>`;
        card.addEventListener("click",()=>{
-          alert("your in")
         navigateToVideoDetails(video.id.videoId);
        });
         container.appendChild(card);

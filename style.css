@@ -123,7 +123,8 @@
 }
 .page{
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    overflow-y:hidden;
 }
 .main-section{
     display: flex;
@@ -132,9 +133,7 @@
     position: relative;
     top:61px;
     right:0px;
-    
-
-
+    overflow-y: scroll;
 }
 .upper-bar{
     display: flex;
@@ -240,8 +239,9 @@
 
 } 
 .recommended-video{
-    width:20vw;
-    border: 1px solid white;
+    width:30vw;
+    /* border: 1px solid white; */
+    overflow-y: scroll;
 } 
 .player-card{
     display: flex;
@@ -273,9 +273,9 @@
 }
 .like-share{
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-start;
     align-items: center;
-    gap:5px;
+    gap:20px;
     flex-wrap: wrap;
 }
 .like-share>p{
@@ -354,4 +354,30 @@
     display: flex;
     flex-direction: column;
     gap:5px;
+}
+.R-btn{
+    display: flex;
+    justify-content: flex-start;
+    gap:20px;
+    padding: 10px;
+}
+.R-btn>button{
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    color: white;
+    background-color: transparent;
+}
+.R-btn>button:hover{
+  color:#121212;
+    background-color: #fff;
+}
+.R-card{
+     display :flex;
+     align-items: center;
+     gap:10px;
+     margin: 10px;
+}
+.size{
+    font-size: 12px;
 }
