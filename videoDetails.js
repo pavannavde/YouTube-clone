@@ -1,9 +1,10 @@
- const Apikey=`AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA`;
+ const Apikey=`AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA`; 
  const baseUrl=`https://www.googleapis.com/youtube/v3`;
  const url ="https://www.googleapis.com/youtube/v3/commentThreads";
 const commentContainer= document.getElementById("comments");
 const playcard= document.getElementById("player-card");
 const channelD= document.getElementById("channeldiv");
+const recommendedVideo =document.querySelector(".recommended-video")
 
 window.addEventListener("load", () => {
     console.log(document.cookie)
@@ -113,7 +114,9 @@ window.addEventListener("load", () => {
         </div>
     </div>`;
      playcard.appendChild(videodetail);
-     data.channelLogo=getchannelLogo(data.snippet.channelId);
+
+     data.channelLogo = await getchannelLogo(data.snippet.channelId);
+     
 
      const channeldiv = document.createElement("div");
      channeldiv.className="channel-div";
@@ -142,6 +145,7 @@ window.addEventListener("load", () => {
       try{
           const response = await fetch(endpoint2);
           const result = await response.json();
+          // console.log(result);
           return result.items[0].snippet.thumbnails.high.url;
   
       }
@@ -212,3 +216,49 @@ window.addEventListener("load", () => {
 //       </div>
 //   </div>
 // </div>
+
+//  loading videos list 
+
+
+
+async function FetchsearchResult(searchValue) {
+  const endpoint = `${baseUrl}/search?key=${Apikey}&part=snippet&q=${searchValue}&maxResults=20`;
+  try {
+    const response = await fetch(endpoint);
+    const Data = await response.json();
+
+    // for(let i=0;i<Data.items.length;i++)
+    // {
+    //     let videoId = Data.items[i].id.videoId;
+    //     let channelId = Data.items[i].snippet.channelId;
+
+    //     // let statistics = await getVideoStatistics(videoId);
+    //     let channelLogo = await getchannelLogo(channelId);
+
+    //   //  Data.items[i].statistics = statistics;
+    //    Data.items[i].channelLogo = channelLogo;
+  
+    // }
+    
+    renderOntoUI(Data.items);
+  } catch (error) {
+    alert(`An error occured ${error}`);
+  }
+}
+
+function renderOntoUI(videoItems){
+
+  videoItems.forEach((item)=>{
+
+    const RDiv = document.createElement("div");
+    RDiv.className="R-card";
+    RDiv.innerHTML=` <img src="${item.snippet.thumbnails.high.url}" alt="">
+    <div>
+        <p>${item.snippet.title}</p>
+        <p class="grey size">${item.snippet.channelTitle}</p>
+        <p class="grey size">1M views.3 years ago</p>
+    </div>`
+    recommendedVideo.append(RDiv);
+  })
+}
+FetchsearchResult("latest trailer");

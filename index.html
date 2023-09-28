@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube</title>
+    <link rel="shortcut icon" href="./Assets/youtube.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +12,7 @@
     <!-- ------- navigation-bar ----- -->
      <div class="nav-bar">
      <div class="logo-element">
-       <img src="./Assets/hamburger.svg" alt="menu">
+       <img src="./Assets/hamburger.svg" alt="menu" id="menu">
        <img src="./Assets/Youtube-Logo.svg" alt="logo">
      </div>
      <div class="search-element">
@@ -31,7 +32,7 @@
 
      <div class="page">
  <!-------- Side-bar section----- -->
-        <div class="side-bar">
+        <div class="side-bar" id="side-bar">
    <div class="side-element">
     <div>
        <img src="./Assets/home.svg" alt="home">
@@ -153,17 +154,30 @@
    </div>
         </div>
 <!-- section for videos -->
-        <div class="main-section">
-   <div class="upper-bar">
-       <button>All</button>
-       <button>Trailers</button>
-       <button>Music</button>
-       <button>Live</button>
-       <button>Arjit Singh</button>
-       <button>News</button>
-       <button>Dj Mix</button>
-       <button>T-series</button>
-   </div>
+        <div class="main-section" id="main-section">
+          <div class="upper-bar" id="upper-bar">
+              <div class="srcollable">
+               <button>All</button>
+               <button>Trailers</button>
+               <button>Music</button>
+               <button>Live</button>
+               <button>Arjit Singh</button>
+               <button>News</button>
+               <button>Dj Mix</button>
+               <button>T-series</button>
+               <button>Shorts</button>
+               <button>Sports</button>
+               <button>Marathi</button>
+               <button>Latest</button>
+               <button>Comedy</button>
+               <button>Thriller</button>
+               <button>Ajay Devgun</button>
+               <button>SRK</button>
+               <button>MHJ</button>
+               <button>Motivation</button>
+               <button>Old Songs</button>
+             </div>
+         </div>
    <div class="video-container" id="video-container">
     <div class="video-card">
        <div class="top">

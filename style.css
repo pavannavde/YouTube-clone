@@ -83,6 +83,7 @@
     /* overflow-x: hidden; */
     overflow-y: scroll;
     /* padding-left: 20px; */
+
 }
 .side-element{
     display: flex;
@@ -141,7 +142,8 @@
 }
 .upper-bar{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    /* gap:20px; */
     align-items: center;
     flex-wrap: wrap;
     background-color: #212121;
@@ -151,8 +153,13 @@
     height: 50px;
     padding: 10px 0px ;
     z-index: 2;
+    overflow-x: auto;
 }
-.upper-bar>button{
+.srcollable{
+    width: 80vw;
+    white-space: nowrap;
+}
+.srcollable>button{
     border:1px solid white;
     width:80px;
     height:40px;
@@ -160,7 +167,7 @@
     background-color: transparent;
     color:white;
 }
-.upper-bar>button:hover{
+.srcollable>button:hover{
     background-color: white;
     color: black;
 }
@@ -174,12 +181,13 @@
     color: white;
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto;
     gap:20px;
     top: 65px;
     right:0px;
     position: relative;
     padding:20px;
-    margin-left:20px;
+    /* margin-left:20px; */
     /* z-index: -1; */
     overflow-y:auto;
     overflow-x: hidden;
@@ -192,7 +200,7 @@
     justify-content: center;
     align-items: center;
     /* border: 1px solid white; */
-    width:22vw;
+    width:20vw;
     padding-bottom: 20px;
     /* box-shadow: 1px 1px 10px white; */
 }
@@ -348,7 +356,7 @@
     gap:20px;
 }
 .comments>div>input{
-    width:90%;
+    width:85%;
     padding:10px;
     background-color: #212121;
     color: white;
@@ -379,9 +387,14 @@
 }
 .R-card{
      display :flex;
+     width:fit-content;
      align-items: center;
      gap:10px;
      margin: 10px;
+}
+.R-card>img{
+    width:40%;
+    height:120px;
 }
 .size{
     font-size: 12px;
@@ -431,6 +444,15 @@
 .recommended-video{
     width:40vw;
 }
+.profile-element{
+    /* display: none; */
+}
+.nav-bar{
+    display: flex;
+    justify-content: space-around;
+    gap:60px;
+    
+}
 
 }
 
@@ -447,7 +469,7 @@
     width:100vw;
     height: 450px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 400px;
     overflow-y: scroll;
  }
  .video-container{
@@ -457,7 +479,7 @@
  }
  .upper-bar{
     width:100vw;
-    height:70px;
+    /* height:70px; */
    padding-bottom: 10px;
  }
  .footer{
@@ -470,8 +492,16 @@
 }   
 .video-Player{
     width:100vw;
+
 }
 .recommended-video{
     width:100vw;
+}
+.profile-element{
+    display: none;
+}
+.nav-bar{
+    display: flex;
+    justify-content: space-around;
 }
 }

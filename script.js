@@ -3,7 +3,18 @@ const apiKey = "AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA";
 const container= document.getElementById("video-container");
 const searchElement = document.getElementById("search");
 const searchbtn= document.getElementById("btn");
+const menubtn=document.getElementById("menu");
 
+// menubtn.addEventListener("click",()=>{
+//    const side=document.getElementById("side-bar");
+//    const main= document.getElementById("main-section");
+//    const upperb= document.getElementById("upper-bar");
+//    container.style="grid-template-columns:repeat(3,1fr); width:80vw;"
+//    main.style="width:80vw";
+//    upperb.style="width=80vw";
+//    side.style="display:flex;"
+
+// })
 //  <div class="video-card">
 //        <div class="top">
 //            <img src="./Assets/Images.svg" alt="thumbnail">
@@ -133,7 +144,8 @@ async function getchannelLogo(channelId) {
 
  function navigateToVideoDetails(videoId){
   document.cookie = `id=${videoId}; path/videoDetail.html`;
-   document.location = "https://pavannavde.github.io/YouTube-clone/videoDetail";
+  //  document.location = "https://pavannavde.github.io/YouTube-clone/videoDetail";
+   document.location="http://127.0.0.1:5500/videoDetail.html"
  }
 
 function renderOntoUI(videoList) {
