@@ -1,4 +1,4 @@
- const Apikey=`AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA`; 
+ const Apikey=`AIzaSyAqL36QbxefcuFV1X-FvxVi3LNCPnGsEqg`; 
  const baseUrl=`https://www.googleapis.com/youtube/v3`;
  const url ="https://www.googleapis.com/youtube/v3/commentThreads";
 const commentContainer= document.getElementById("comments");
@@ -242,7 +242,7 @@ async function FetchsearchResult(searchValue) {
     
     renderOntoUI(Data.items);
   } catch (error) {
-    alert(`An error occured ${error}`);
+    console.log(`An error occured ${error}`);
   }
 }
 
@@ -261,4 +261,4 @@ function renderOntoUI(videoItems){
     recommendedVideo.append(RDiv);
   })
 }
-FetchsearchResult("latest trailer");
+FetchsearchResult(`Latest Videos`);

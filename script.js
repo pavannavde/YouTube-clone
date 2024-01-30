@@ -1,73 +1,16 @@
 const baseUrl = "https://www.googleapis.com/youtube/v3";
-const apiKey = "AIzaSyBnnOv_z3zSt6ndn85qNHKSAGHkyIbhixA";
+const apiKey = "AIzaSyAqL36QbxefcuFV1X-FvxVi3LNCPnGsEqg";
 const container= document.getElementById("video-container");
 const searchElement = document.getElementById("search");
 const searchbtn= document.getElementById("btn");
 const menubtn=document.getElementById("menu");
-
-// menubtn.addEventListener("click",()=>{
-//    const side=document.getElementById("side-bar");
-//    const main= document.getElementById("main-section");
-//    const upperb= document.getElementById("upper-bar");
-//    container.style="grid-template-columns:repeat(3,1fr); width:80vw;"
-//    main.style="width:80vw";
-//    upperb.style="width=80vw";
-//    side.style="display:flex;"
-
-// })
-//  <div class="video-card">
-//        <div class="top">
-//            <img src="./Assets/Images.svg" alt="thumbnail">
-//        </div>
-//        <div class="Bottom">
-//            <div>
-//                <img src="./Assets/User-1.svg" alt="profile">
-//            </div>
-//            <div class="text">
-//                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                <p class="Cinfo">James Gouse <br> 15k Views. 1 week Ago</p>
-//            </div>
-//        </div>
-//     </div>
-
-
-//  {
-//     "kind": "youtube#searchResult",
-//     "etag": "Dn_HjQZj7iXCRkRlNQXL3xxXTxE",
-//     "id": {
-//         "kind": "youtube#video",
-//         "videoId": "_O_9HUZvJK4"
-//     },
-//     "snippet": {
-//         "publishedAt": "2023-07-31T13:18:46Z",
-//         "channelId": "UCJsApDpIBPpRRg0n9ZVmKAQ",
-//         "title": "Weather obsession of Bangalore people📈🤣 #shorts #ahmedmasood #bangalore #ytshorts",
-//         "description": "",
-//         "thumbnails": {
-//             "default": {
-//                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/default.jpg",
-//                 "width": 120,
-//                 "height": 90
-//             },
-//             "medium": {
-//                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/mqdefault.jpg",
-//                 "width": 320,
-//                 "height": 180
-//             },
-//             "high": {
-//                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/hqdefault.jpg",
-//                 "width": 480,
-//                 "height": 360
-//             }
-//         },
-//         "channelTitle": "Ahmed Masood",
-//         "liveBroadcastContent": "none",
-//         "publishTime": "2023-07-31T13:18:46Z"
-//     },
-//     "statistics" :
-// }
-
-
+const navBar= document.getElementById('nav-bar');
+const loader = document.getElementById('loaderContainer')
+//fetching initial videos for ui
+window.addEventListener('load',()=>{
+  FetchsearchResult("latest videos");
+})
+//calculating publish time with respective current time
 function caluclateUploadTime(publish){
 
  const currentDate = new Date();
@@ -96,7 +39,7 @@ function caluclateUploadTime(publish){
  return `${Math.floor(secondsGap / secondsPerYear)} years ago`;
 
 }
-
+//fetching channel details 
 async function getchannelLogo(channelId) {
 
     const endpoint=`${baseUrl}/channels?key=${apiKey}&id=${channelId}&part=snippet`;
@@ -107,12 +50,13 @@ async function getchannelLogo(channelId) {
 
     }
     catch(error){
-        alert("An error occured at fetching channel logo")
+        console.log("An error occured at fetching channel logo")
     }
     
 
 }
 
+//fetching statistics of video
  async function getVideoStatistics(videoId){
    
     const endpoint = `${baseUrl}/videos?key=${apiKey}&part=statistics&id=${videoId}`;
@@ -122,10 +66,12 @@ async function getchannelLogo(channelId) {
         return  result.items[0].statistics;
     }
     catch(error){
-      alert("An error occured in fetching statistics of video");
+      console.log("An error occured in fetching statistics of video");
     }
 
  }
+
+ //converting number in million, lakhs
  function converter(value){
     value= Number(value);
     if(value<1000){
@@ -141,12 +87,17 @@ async function getchannelLogo(channelId) {
     }
     return `${Math.floor(value/1000000)}M Views`
  }
+  
+ //navigating home page to videoDetail page
 
  function navigateToVideoDetails(videoId){
   document.cookie = `id=${videoId}; path/videoDetail.html`;
-   document.location = "https://pavannavde.github.io/YouTube-clone/videoDetail";
-  //  document.location="http://127.0.0.1:5500/videoDetail.html"
+  // document.cookie = `search=${searchElement.value}; path/videoDetail.html`;
+  //  document.location = "https://pavannavde.github.io/YouTube-clone/videoDetail";
+   document.location="http://127.0.0.1:5500/videoDetail.html"
  }
+
+ //Rendering videos on UI
 
 function renderOntoUI(videoList) {
     container.innerHTML="";
@@ -173,6 +124,8 @@ function renderOntoUI(videoList) {
   
 }
 
+//fetching search results on api 
+
 async function FetchsearchResult(searchValue) {
   const endpoint = `${baseUrl}/search?key=${apiKey}&part=snippet&q=${searchValue}&maxResults=20`;
   try {
@@ -191,17 +144,18 @@ async function FetchsearchResult(searchValue) {
        Data.items[i].channelLogo = channelLogo;
   
     }
-    
+    //hide loader
+    loader.style.display='none';
     renderOntoUI(Data.items);
   } catch (error) {
-    alert(`An error occured ${error}`);
+    console.log(`An error occured ${error}`);
   }
 }
 
+//eventListener for serach button
 searchbtn.addEventListener("click",()=>{
 
     const searchString =searchElement.value;
     FetchsearchResult(searchString);
 
 });
-FetchsearchResult("latest videos");
