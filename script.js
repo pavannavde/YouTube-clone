@@ -6,6 +6,20 @@ const searchbtn= document.getElementById("btn");
 const menubtn=document.getElementById("menu");
 const navBar= document.getElementById('nav-bar');
 const loader = document.getElementById('loaderContainer')
+const themeBtn = document.getElementById('themeBtn');
+
+//theme changing functionality
+themeBtn.addEventListener('change',()=>{
+  if(localStorage.getItem("theme")=="light")
+  {
+    document.documentElement.setAttribute('data-theme','dark');
+    localStorage.setItem('theme','dark')
+  }
+  else{
+    document.documentElement.setAttribute('data-theme','light');
+    localStorage.setItem('theme','light')
+  }
+})
 //fetching initial videos for ui
 window.addEventListener('load',()=>{
   FetchsearchResult("latest videos");

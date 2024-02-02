@@ -5,6 +5,20 @@ const commentContainer= document.getElementById("comments");
 const playcard= document.getElementById("player-card");
 const channelD= document.getElementById("channeldiv");
 const recommendedVideo =document.querySelector(".recommended-video")
+const themeBtn = document.getElementById('themeBtn');
+
+//theme changing functionality
+themeBtn.addEventListener('change',()=>{
+  if(localStorage.getItem("theme")=="light")
+  {
+    document.documentElement.setAttribute('data-theme','dark');
+    localStorage.setItem('theme','dark')
+  }
+  else{
+    document.documentElement.setAttribute('data-theme','light');
+    localStorage.setItem('theme','light')
+  }
+})
 
 window.addEventListener("load", () => {
     console.log(document.cookie)
