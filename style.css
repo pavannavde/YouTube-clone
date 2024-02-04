@@ -330,9 +330,9 @@
 }
 .loader {
     border: 6px solid var(--darkGrey); /* Light grey */
-    border-top: 6px solid  rgb(231, 5, 5);
-    border-bottom: 6px solid  rgb(231, 5, 5);
-    border-left:6px solid rgb(231, 5, 5) ;
+    border-top: 6px dotted rgb(100, 100, 100);
+    border-bottom: 6px dotted  rgb(100, 100, 100);
+    border-left:6px dotted rgb(100, 100, 100) ;
      /* Red */
     border-radius: 50%;
     width: 60px;
